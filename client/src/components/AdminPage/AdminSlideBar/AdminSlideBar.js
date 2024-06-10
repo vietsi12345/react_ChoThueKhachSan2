@@ -10,11 +10,11 @@ import EqualizerIcon from '@mui/icons-material/Equalizer';
 import AddHomeIcon from '@mui/icons-material/AddHome';
 
 const menu = [
-    { title: "Quản lý khách hàng", icon: <Dashboard />, path: "/customer" },
+    { title: "Quản lý khách hàng", icon: <Dashboard />, path: "/customers" },
     { title: "Quản lý đơn hàng", icon: <ShoppingBag />, path: "/orders" },
-    { title: "Quản lý phòng", icon: <ShopTwoIcon />, path: "/room" },
+    { title: "Quản lý phòng", icon: <ShopTwoIcon />, path: "/rooms" },
     { title: "Quản lý tài khoản cá nhân", icon: <Category />, path: "/myaccount" },
-    { title: "Quản lý khách sạn", icon: <AddHomeIcon />, path: "/hotel" },
+    { title: "Quản lý khách sạn", icon: <AddHomeIcon />, path: "/hotels" },
     { title: "Thống kê doanh thu", icon: <EqualizerIcon />, path: "/statistics" },
     { title: "Đăng xuất", icon: <Logout />, path: "/logout" }
 ]
