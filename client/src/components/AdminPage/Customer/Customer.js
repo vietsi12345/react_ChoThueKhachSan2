@@ -2,14 +2,14 @@ import React from 'react'
 
 export const Customer = () => {
   return (
-    <div><div className="all" style={{display: 'flex'}}>
+    <div><div className="all flex justify-center" >
     <div />
     <div className="wrapper-table-list-customer">
       <h2>Bảng nhân viên</h2>
       <div if="message">
         <p style={{color: 'red'}}>message</p>
       </div>
-      <table className="table table-hover">
+      <table className="table table-hover w-4/5">
         <thead style={{backgroundColor: '#353a40', color: '#ccc'}}>
           <tr>
             <th>id</th>
