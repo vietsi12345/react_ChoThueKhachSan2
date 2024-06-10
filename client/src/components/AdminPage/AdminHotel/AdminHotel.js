@@ -1,7 +1,10 @@
 import React from 'react'
+import { AdminHotelTable } from './AdminHotelTable'
 
 export const AdminHotel = () => {
     return (
-        <div>Admin Hotel</div>
+        <div>
+            <AdminHotelTable />
+        </div>
     )
 }

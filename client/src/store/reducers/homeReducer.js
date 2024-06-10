@@ -41,6 +41,24 @@ const homeReducer = (state = initstate, action) => {
                 hotelByID: action.hotelByID || [],
                 msg: action.msg || [],
             }
+        case actionType.POST_CREATEHOTEL:
+            return {
+                ...state,
+                homes: [...state.homes, action.data],
+                msg: action.msg || [],
+            }
+        case actionType.DELETE_HOTEL:
+            return {
+                ...state,
+                homes: state.homes.filter((item) => item.id !== action.data),
+                msg: action.msg || [],
+            }
+        case actionType.UPDATE_HOME:
+            return {
+                ...state,
+                homes: state.homes.map((item) => item.id === action.data.id ? action.data : item),
+                msg: action.msg || [],
+            }
         default:
             return state;
     }

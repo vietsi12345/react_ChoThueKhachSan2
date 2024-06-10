@@ -71,3 +71,50 @@ export const apiGetHotelByID = (idHotel) => new Promise(async (resolve, reject) 
         reject(error)
     }
 })
+
+export const apiCreateHotel = (formData) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'post',
+            url: `/api/hotel`,
+            data: formData, // Truyền formData vào phần data
+            headers: {
+                'Content-Type': 'multipart/form-data', // Đặt Content-Type là 'multipart/form-data'
+            },
+        })
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const apiDeleteHotel = (idHotel) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'delete',
+            url: `/api/hotel/${idHotel}`,
+        })
+
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
+
+export const apiUpdateHome = ({ idHotel, formData }) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'put',
+            url: `/api/hotel/${idHotel}`,
+            data: formData,
+            headers: {
+                'Content-Type': 'multipart/form-data', // Đặt Content-Type là 'multipart/form-data'
+            },
+        })
+
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
+

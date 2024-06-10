@@ -21,7 +21,7 @@ const System = () => {
           <AdminSlideBar handleClose={handleClose} />
         </div>
 
-        <div className='lg:w-[80%]'>
+        <div className='lg:w-[80%] px-10'>
           <Routes>
             <Route path='/' element={<HomeAdmin />} />
             <Route path='/orders' element={<Orders />} />

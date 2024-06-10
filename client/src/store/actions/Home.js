@@ -1,5 +1,5 @@
 import actionType from "./actionType";
-import { apiGetAlltHomes, apiGetHomesByCityName, apiGetHotelByID, apiGetListCities, apiSearchHomesByName } from '../../services/Home'
+import { apiCreateHotel, apiDeleteHotel, apiGetAlltHomes, apiGetHomesByCityName, apiGetHotelByID, apiGetListCities, apiSearchHomesByName, apiUpdateHome } from '../../services/Home'
 
 export const getAllHome = () => async (dispath) => {
     try {
@@ -120,6 +120,81 @@ export const getHotelByID = (idHotel) => async (dispath) => {
         dispath({
             type: actionType.GET_HOTELBYID,
             hotelByID: null
+        })
+    }
+}
+
+export const createHotel = (formData) => async (dispath) => {
+    try {
+        const response = await apiCreateHotel(formData)
+
+        if (response.status === 200) {
+            dispath({
+                type: actionType.POST_CREATEHOTEL,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.POST_CREATEHOTEL,
+                msg: 'Lỗi'
+            })
+        }
+
+    } catch (error) {
+        dispath({
+            type: actionType.POST_CREATEHOTEL,
+            data: null
+        })
+    }
+}
+
+export const deleteHotel = (idHotel) => async (dispath) => {
+    try {
+        const response = await apiDeleteHotel(idHotel)
+
+        if (response.status === 200) {
+            dispath({
+                type: actionType.DELETE_HOTEL,
+                data: idHotel
+            })
+        } else {
+
+            dispath({
+                type: actionType.DELETE_HOTEL,
+                msg: 'Lỗi'
+            })
+        }
+
+    } catch (error) {
+        dispath({
+            type: actionType.DELETE_HOTEL,
+            data: null
+        })
+    }
+}
+
+export const updateHotel = ({ idHotel, formData }) => async (dispath) => {
+    try {
+        const response = await apiUpdateHome({ idHotel, formData })
+
+        if (response.status === 200) {
+            dispath({
+                type: actionType.UPDATE_HOME,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.UPDATE_HOME,
+                msg: 'Lỗi'
+            })
+        }
+
+    } catch (error) {
+        dispath({
+            type: actionType.UPDATE_HOME,
+            data: null
         })
     }
 }

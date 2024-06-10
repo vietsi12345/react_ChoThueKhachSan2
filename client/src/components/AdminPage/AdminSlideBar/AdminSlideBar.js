@@ -38,7 +38,7 @@ const AdminSlideBar = ({ handleClose }) => {
                 <Drawer variant={isSmallScreen ? "temporary" : "permanent"} onClose={handleClose} anchor='left' open="true" sx={{ zIndex: 1 }}>
                     <div className='w-[70] lg:w-[20] h-screen flex flex-col justify-center text-xl space-y-[1.65rem]'>
                         {menu.map((item, i) => <>
-                            <div onClick={() => handleNavigate(item)} className='px-5 flex items-center gap-5 cursor-pointer'>
+                            <div key={i} onClick={() => handleNavigate(item)} className='px-5 flex items-center gap-5 cursor-pointer'>
                                 {item.icon}
                                 <span>{item.title}</span>
                             </div>
