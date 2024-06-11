@@ -1,4 +1,4 @@
-import { apiBooKingSuccess, apiCancelBooking, apiGetBookingsByEmail, apiNewCreateBooking } from "../../services/Booking";
+import { apiBooKingSuccess, apiCancelBooking, apiGetAllBooking, apiGetBookingsByEmail, apiNewCreateBooking } from "../../services/Booking";
 import actionType from "./actionType";
 
 export const postNewCreateBooking = ({ checkInDate, checkOutDate, guestFullName, guestEmail, numOfAdults, numOfChildren, note, totalPrice, roomId, hotelId }) => async (dispath) => {
@@ -95,3 +95,27 @@ export const cancelBooking = (bookingId) => async (dispatch) => {
         });
     }
 };
+
+export const getAllBookings = () => async (dispath) => {
+    try {
+        const response = await apiGetAllBooking()
+        if (response.status === 200) {
+
+            dispath({
+                type: actionType.GET_ALLBOOKING,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.GET_ALLBOOKING,
+                msg: 'Lỗi'
+            })
+        }
+    } catch (error) {
+        dispath({
+            type: actionType.GET_ALLBOOKING,
+            data: null
+        })
+    }
+}

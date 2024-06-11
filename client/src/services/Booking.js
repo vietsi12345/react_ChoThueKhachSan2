@@ -74,3 +74,17 @@ export const apiCancelBooking = (bookingId) => new Promise(async (resolve, rejec
 });
 
 
+export const apiGetAllBooking = () => new Promise(async (resolve, reject) => {
+    try {
+
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/booking/all`
+        });
+
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+

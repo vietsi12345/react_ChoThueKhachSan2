@@ -20,6 +20,10 @@ const Header = () => {
         navigate(path.REGISTER);
     };
 
+    const goProfiles = () => {
+        navigate(path.PROFILES)
+    }
+
 
     return (
         <div className=' border-b border-gray-300 px-4 flex items-center justify-between  w-1020 h-[56px]'>
@@ -38,18 +42,23 @@ const Header = () => {
                     <FaMoneyBill size='21' />
                     <div className='font-semibold text-base'>VNĐ</div>
                 </div>
-                <div onClick={goLogin} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
-                    <RxAvatar size='21' />
-                    <div className='font-semibold text-base'>Đăng nhập</div>
-                </div>
-                <div onClick={goRegister} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
-                    <FaUserPlus size='21' />
-                    <div className='font-semibold text-base'>Tạo tài khoản</div>
-                </div>
-                <div className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
-                    <IoMenuOutline size='21' />
-                    <div className='font-semibold text-base'>Menu</div>
-                </div>
+                {false ? (
+                    <>
+                        <div onClick={goLogin} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
+                            <RxAvatar size='21' />
+                            <div className='font-semibold text-base'>Đăng nhập</div>
+                        </div>
+                        <div onClick={goRegister} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
+                            <FaUserPlus size='21' />
+                            <div className='font-semibold text-base'>Tạo tài khoản</div>
+                        </div>
+                    </>
+                ) : (
+                    <div onClick={goProfiles} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
+                        <RxAvatar size='21' />
+                        <div className='font-semibold text-base'>Xin chào, Nguyễn Viết Sĩ</div>
+                    </div>
+                )}
 
             </div>
         </div >

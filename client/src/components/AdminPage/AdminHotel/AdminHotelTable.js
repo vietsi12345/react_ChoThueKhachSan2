@@ -88,7 +88,9 @@ export const AdminHotelTable = () => {
                                 >
                                     <TableCell component="th" scope="row">{item?.id}</TableCell>
                                     <TableCell align="center">
-                                        <Avatar src={`data:image/png;base64,${item?.photo}`}></Avatar>
+                                        <img src={`data:image/png;base64,${item?.photo}`}
+                                            className='w-[80px] h-[60px] rounded-md object-cover'
+                                        />
                                     </TableCell>
                                     <TableCell align="center">{item?.name}</TableCell>
                                     <TableCell align="center">

@@ -3,6 +3,7 @@ import actionType from "../actions/actionType";
 const initstate = {
     dataPostNew: [],
     myBookings: [],
+    allBooking: [],
     msg: '',
 };
 
@@ -18,6 +19,12 @@ const bookingReducer = (state = initstate, action) => {
             return {
                 ...state,
                 myBookings: action.data || [],
+                msg: action.msg || '',
+            };
+        case actionType.GET_ALLBOOKING:
+            return {
+                ...state,
+                allBooking: action.data || [],
                 msg: action.msg || '',
             };
         case actionType.GET_CANCELBOOKING:

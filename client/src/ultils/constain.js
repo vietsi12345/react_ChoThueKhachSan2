@@ -3,7 +3,7 @@ export const path = {
     LOGIN: 'login',
     REGISTER: 'register',
     DETAIL__NAME__ID: 'chi-tiet/:name/:id',
-    PROFILES: 'profiles',
+    PROFILES: 'profiles/*',
     MYPROFILES: 'my-profiles',
     MYBOOKING: 'my-booking',
     BOOKING: '/booking/:nameHotel/:idhotel/:typeRoom/:idRoom',
