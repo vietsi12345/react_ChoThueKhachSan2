@@ -82,8 +82,8 @@ const BookingV2 = () => {
     return (
         <div className='bg-[#F7F9FA] w-full '>
             <div className='bg-[#FFFFFF] w-full h-[58px]  flex items-center justify-around'>
-                <img src='https://d1785e74lyxkqq.cloudfront.net/_next/static/v2/9/97f3e7a54e9c6987283b78e016664776.svg'
-                    className='w-[108px] h-[34,4px] object-contain cursor-pointer'
+                <img src='https://gcs.tripi.vn/public-tripi/tripi-feed/img/475201KCm/anh-mo-ta.png'
+                    className='w-[108px] h-[58px] object-cover cursor-pointer'
                     onClick={goHome}
                 />
                 <div className='flex gap-3'>

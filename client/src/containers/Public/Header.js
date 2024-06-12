@@ -35,9 +35,9 @@ const Header = () => {
     return (
         <div className=' border-b border-gray-300 px-4 flex items-center justify-between  w-1020 h-[56px]'>
             <Link to={'/'}>
-                <img src='https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg'
+                <img src='https://gcs.tripi.vn/public-tripi/tripi-feed/img/475201KCm/anh-mo-ta.png'
                     alt="logo"
-                    className='w-[114px] h-[42px] object-contain'
+                    className='w-[114px] h-[56px] object-cover'
                 />
             </Link>
             <div className='flex gap-3 h-full hover:cursor-pointer'>
