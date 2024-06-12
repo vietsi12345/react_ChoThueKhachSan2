@@ -1,7 +1,9 @@
-import React, { memo } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import icons from '../../ultils/icon'
 import { path } from '../../ultils/constain'
+import { useDispatch, useSelector } from 'react-redux'
+import * as actions from '../../store/actions'
 
 
 const { GiSelfLove, FaMoneyBill,
@@ -11,6 +13,11 @@ const { GiSelfLove, FaMoneyBill,
 
 
 const Header = () => {
+
+    const { user } = useSelector(state => state.auth)
+    const jwt = localStorage.getItem('jwt')
+
+
     const navigate = useNavigate()
     const goLogin = () => {
         navigate(path.LOGIN);
@@ -42,7 +49,7 @@ const Header = () => {
                     <FaMoneyBill size='21' />
                     <div className='font-semibold text-base'>VNĐ</div>
                 </div>
-                {false ? (
+                {!jwt ? (
                     <>
                         <div onClick={goLogin} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
                             <RxAvatar size='21' />
@@ -56,10 +63,9 @@ const Header = () => {
                 ) : (
                     <div onClick={goProfiles} className='flex gap-2 hover:bg-gray-300 h-full justify-center items-center px-2'>
                         <RxAvatar size='21' />
-                        <div className='font-semibold text-base'>Xin chào, Nguyễn Viết Sĩ</div>
+                        <div className='font-semibold text-base'>{`Xin chào, ${user?.fullName}`}</div>
                     </div>
                 )}
-
             </div>
         </div >
     )

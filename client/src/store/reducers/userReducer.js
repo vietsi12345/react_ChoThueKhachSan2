@@ -1,13 +1,13 @@
-const initstate = {
-    userData: {}
-}
+// const initstate = {
+//     userData: {}
+// }
 
-const userReducer = (state = initstate, action) => {
-    switch (action.type) {
+// const userReducer = (state = initstate, action) => {
+//     switch (action.type) {
 
-        default:
-            return state;
-    }
-}
+//         default:
+//             return state;
+//     }
+// }
 
-export default userReducer
+// export default userReducer

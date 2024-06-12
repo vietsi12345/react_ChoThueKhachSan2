@@ -3,9 +3,19 @@ import { Header, Home, HomePage, DetailHome, Login, Register, Booking, BookingV2
 import { path } from "./ultils/constain";
 import { System } from "./containers/System";
 import HomeAdmin from './containers/Public/AdminPage/HomeAdmin'
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../src/store/actions"
+import { useEffect } from "react";
 
 
 function App() {
+  const dispatch = useDispatch()
+  const { user } = useSelector(state => state.auth)
+  const jwt = localStorage.getItem('jwt')
+  useEffect(() => {
+    dispatch(actions.getUserByToken(jwt))
+  }, [jwt])
+  console.log(user)
   return (
     <div className="bg-primary">
       <Routes>

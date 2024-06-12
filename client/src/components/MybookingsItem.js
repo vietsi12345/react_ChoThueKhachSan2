@@ -13,7 +13,7 @@ const MybookingsItem = ({ item }) => {
     const [hotel, setHotel] = useState(null);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { msg, myBookings } = useSelector(state => state.booking);
+    const { user } = useSelector(state => state.auth);
 
     useEffect(() => {
         const fetchRoom = async () => {
@@ -43,9 +43,9 @@ const MybookingsItem = ({ item }) => {
                 nameHotel: hotel.name,
                 roomType: room.roomType,
                 total: room?.roomPrice + Math.round(+room?.roomPrice * 1 / 100),
-                name: 'Nguyễn Viết Sĩ',
+                name: user?.fullName,
                 phone: '034728742',
-                email: 'nguyenvietsi12@gmail.com',
+                email: user?.email,
                 idHotel: item.hotelId,
                 idRoom: item.roomId,
                 startDate: item?.checkInDate,
@@ -59,9 +59,6 @@ const MybookingsItem = ({ item }) => {
 
     const handleCancelBooking = () => {
         dispatch(actions.cancelBooking(item.bookingId));
-        if (msg) {
-            alert(msg);
-        }
     };
 
     return (

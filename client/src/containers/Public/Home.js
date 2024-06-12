@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from "./Header";
 import Search from './Search';
 import Provice from './Provice';
@@ -7,7 +7,10 @@ import Contact from '../../components/Contact';
 import Info from '../../components/Info';
 import { Outlet } from 'react-router-dom';
 
+
+
 const Home = () => {
+
     return (
         <div className=' flex flex-col items-center h-full w-full'>
             <Header />

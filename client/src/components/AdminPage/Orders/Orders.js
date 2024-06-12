@@ -16,7 +16,7 @@ const Orders = () => {
     }
     return (
         <div className='w-full'>
-            <Card className='p-5'>
+            {/* <Card className='p-5'>
 
                 <Typography sx={{ paddingBottom: "1rem" }} variant='h5'>
                     Trạng thái đơn hàng
@@ -28,7 +28,7 @@ const Orders = () => {
                         )}
                     </RadioGroup>
                 </FormControl>
-            </Card>
+            </Card> */}
 
             <OrderTable />
         </div>

@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Button } from '@mui/material';
+import { format } from 'date-fns';
+import { useDispatch, useSelector } from 'react-redux';
+import * as actions from '../../../store/actions';
 
 const ChartComponent = () => {
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(new Date());
+    const [data, setData] = useState([]);
 
-    const data = [
-        { name: 'January', uv: 4000, pv: 2400, amt: 2400 },
-        { name: 'February', uv: 3000, pv: 1398, amt: 2210 },
-        { name: 'March', uv: 2000, pv: 9800, amt: 2290 },
-        { name: 'April', uv: 2780, pv: 3908, amt: 2000 },
-        { name: 'May', uv: 1890, pv: 4800, amt: 2181 },
-        { name: 'June', uv: 2390, pv: 3800, amt: 2500 },
-        { name: 'July', uv: 3490, pv: 4300, amt: 2100 },
-    ];
+    const jwt = localStorage.getItem('jwt');
+    const dispatch = useDispatch();
+    const { statistic } = useSelector(state => state.booking);
+
+    const handleSelectDate = async () => {
+        const formattedStartDate = format(startDate, 'yyyy-MM-dd');
+        const formattedEndDate = format(endDate, 'yyyy-MM-dd');
+        console.log('Start Date:', formattedStartDate, 'End Date:', formattedEndDate);
+        dispatch(actions.getStatistic({ jwt, dateStart: formattedStartDate, dateEnd: formattedEndDate }));
+    };
+
+    useEffect(() => {
+        if (statistic) {
+            const formattedData = statistic.map(item => ({
+                month: `Tháng ${item.month}`,
+                quantity: item.quantity,
+                total: item.total,
+            }));
+            setData(formattedData);
+        }
+    }, [statistic]);
 
     return (
         <div className="container mx-auto mt-10">
@@ -30,7 +47,7 @@ const ChartComponent = () => {
                         startDate={startDate}
                         endDate={endDate}
                         placeholderText="Chọn ngày bắt đầu"
-                        dateFormat="eee, dd MMMM yyyy"
+                        dateFormat="yyyy-MM-dd"
                         className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     />
                 </div>
@@ -45,9 +62,14 @@ const ChartComponent = () => {
                         endDate={endDate}
                         minDate={startDate}
                         placeholderText="Chọn ngày kết thúc"
-                        dateFormat="eee, dd MMMM yyyy"
+                        dateFormat="yyyy-MM-dd"
                         className="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300"
                     />
+                </div>
+                <div className="flex items-end">
+                    <Button variant="contained" onClick={handleSelectDate}>
+                        Thống kê
+                    </Button>
                 </div>
             </div>
             <div className="mt-6">
@@ -62,12 +84,12 @@ const ChartComponent = () => {
                         }}
                     >
                         <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <XAxis dataKey="month" />
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="pv" fill="#8884d8" />
-                        <Bar dataKey="uv" fill="#82ca9d" />
+                        <Bar dataKey="quantity" fill="#8884d8" />
+                        <Bar dataKey="total" fill="#82ca9d" />
                     </BarChart>
                 </ResponsiveContainer>
             </div>

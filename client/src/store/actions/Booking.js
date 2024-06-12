@@ -1,4 +1,4 @@
-import { apiBooKingSuccess, apiCancelBooking, apiGetAllBooking, apiGetBookingsByEmail, apiNewCreateBooking } from "../../services/Booking";
+import { apiBooKingSuccess, apiCancelBooking, apiGetAllBooking, apiGetBookingsByEmail, apiNewCreateBooking, apiStatistic, apiUpdateBookingStatus } from "../../services/Booking";
 import actionType from "./actionType";
 
 export const postNewCreateBooking = ({ checkInDate, checkOutDate, guestFullName, guestEmail, numOfAdults, numOfChildren, note, totalPrice, roomId, hotelId }) => async (dispath) => {
@@ -82,6 +82,7 @@ export const cancelBooking = (bookingId) => async (dispatch) => {
                 type: actionType.GET_CANCELBOOKING,
                 data: response.data,
             });
+            alert(response?.data?.message)
         } else {
             dispatch({
                 type: actionType.GET_CANCELBOOKING,
@@ -115,6 +116,54 @@ export const getAllBookings = () => async (dispath) => {
     } catch (error) {
         dispath({
             type: actionType.GET_ALLBOOKING,
+            data: null
+        })
+    }
+}
+
+export const updateBookingStatus = ({ jwt, status, idBooking }) => async (dispath) => {
+    try {
+        const response = await apiUpdateBookingStatus({ jwt, status, idBooking })
+        if (response.status === 200) {
+
+            dispath({
+                type: actionType.UPDATE_BOOKINGSTATUS,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.UPDATE_BOOKINGSTATUS,
+                msg: 'Lỗi'
+            })
+        }
+    } catch (error) {
+        dispath({
+            type: actionType.UPDATE_BOOKINGSTATUS,
+            data: null
+        })
+    }
+}
+
+export const getStatistic = ({ jwt, dateStart, dateEnd }) => async (dispath) => {
+    try {
+        const response = await apiStatistic({ jwt, dateStart, dateEnd })
+        if (response.status === 200) {
+
+            dispath({
+                type: actionType.GET_STATISTIC,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.GET_STATISTIC,
+                msg: 'Lỗi'
+            })
+        }
+    } catch (error) {
+        dispath({
+            type: actionType.GET_STATISTIC,
             data: null
         })
     }

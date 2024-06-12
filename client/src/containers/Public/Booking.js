@@ -11,12 +11,12 @@ import { format } from 'date-fns';
 const { TbCircleNumber1, TbCircleNumber2, TbCircleNumber3, CiClock2, IoIosCloseCircle } = icons
 
 const Booking = () => {
-
+    const { user } = useSelector(state => state.auth)
     const [selectedOption, setSelectedOption] = useState('isMe');
     const [isShowNoMe, setIsShowNoMe] = useState(false)
     const [isShowAcpectPayment, setIsShowAcpectPayment] = useState(false)
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
+    const [name, setName] = useState(user?.fullName || '')
+    const [email, setEmail] = useState(user?.email || '')
     const [phone, setPhone] = useState('')
     const [nameNoME, setNameNoME] = useState('')
     const [errorName, setErrorName] = useState('')

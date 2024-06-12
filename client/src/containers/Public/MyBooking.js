@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux'
 
 const MyBooking = () => {
     const { myBookings } = useSelector(state => state.booking)
+    const { user } = useSelector(state => state.auth)
     const dispatch = useDispatch()
     console.log('mybookings: ', myBookings[0])
 
 
     useEffect(() => {
-        dispatch(actions.getMyBooking('adada'))
+        dispatch(actions.getMyBooking(user?.email))
     }, [])
 
 

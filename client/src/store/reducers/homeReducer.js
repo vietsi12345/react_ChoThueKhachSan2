@@ -48,6 +48,7 @@ const homeReducer = (state = initstate, action) => {
                 msg: action.msg || [],
             }
         case actionType.DELETE_HOTEL:
+            console.log(action.data, 'hotel')
             return {
                 ...state,
                 homes: state.homes.filter((item) => item.id !== action.data),

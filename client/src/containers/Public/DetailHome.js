@@ -22,7 +22,6 @@ const DetailHome = () => {
         window.scrollTo(0, 0);
         dispath(actions.getHotelByID(id))
     }, []);
-
     const today = new Date();
     const tomorrow = new Date();
     tomorrow.setDate(today.getDate() + 1);

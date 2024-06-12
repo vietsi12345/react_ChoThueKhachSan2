@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { apiSignIn } from '../../services/Auth';
+import * as actions from '../../store/actions'
 
 
 
@@ -11,20 +13,33 @@ const Login = () => {
     const [errorPassWord, setErrorPassWord] = useState('');
     const [errorEmail, seterrorEmail] = useState('')
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-
+    const { jwt, msg } = useSelector(state => state.auth)
 
 
     const handleSubmit = async () => {
+        let hasError = false;
         if (!email) {
             seterrorEmail('Vui lòng điền đầy đủ thông tin email')
+            hasError = true
         } else seterrorEmail('')
         if (!password) {
             setErrorPassWord('Vui lòng điền đầy đủ thông tin mật khẩu')
-        } else if (password.length <= 8) {
+            hasError = true;
+        } else if (password.length < 8) {
             setErrorPassWord('Mật khẩu phải đủ tối thiểu 8 kí tự')
+            hasError = true;
         } else setErrorPassWord('')
+        if (!hasError) {
+            const data = {
+                email: email,
+                password: password
+            }
+            dispatch(actions.signIn({ data, navigate }))
+        }
     };
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);

@@ -88,3 +88,37 @@ export const apiGetAllBooking = () => new Promise(async (resolve, reject) => {
     }
 });
 
+export const apiUpdateBookingStatus = ({ jwt, status, idBooking }) => new Promise(async (resolve, reject) => {
+    try {
+
+        const response = await axiosConfig({
+            method: 'put',
+            url: `/api/booking/admin/update-status/${idBooking}?status=${status}`,
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        });
+
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});
+
+export const apiStatistic = ({ jwt, dateStart, dateEnd }) => new Promise(async (resolve, reject) => {
+    console.log(dateEnd, dateStart)
+    try {
+
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/booking/admin/statistic?dateStart=${dateStart}&dateEnd=${dateEnd}`,
+            headers: {
+                Authorization: `Bearer ${jwt}`
+            }
+        });
+
+        resolve(response);
+    } catch (error) {
+        reject(error);
+    }
+});

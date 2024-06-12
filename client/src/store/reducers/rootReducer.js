@@ -21,7 +21,8 @@ const authConfig = {
 
 const rootReducer = combineReducers({
     auth: persistReducer(authConfig, authReducer),
-    user: userReducer,
+    // auth: authReducer,
+    // user: userReducer,
     home: homeReducer,
     room: roomReducer,
     booking: bookingReducer

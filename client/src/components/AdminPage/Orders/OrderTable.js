@@ -18,10 +18,9 @@ const style = {
 };
 
 const orderStatus = [
-  { label: "Pending", value: "PENDING" },
-  { label: "Completed", value: "COMPLETED" },
-  { label: "Out for Delivery", value: "OUT_FOR_DELIVERY" },
-  { label: "Delivery", value: "DELIVERY" }
+  { label: "Đã thanh toán", value: "Đã thanh toán" },
+  { label: "Chưa thanh toán", value: "Chưa thanh toán" },
+  { label: "Đã hủy", value: "Đã hủy" },
 ];
 
 export const OrderTable = () => {
@@ -56,7 +55,11 @@ export const OrderTable = () => {
     setCurrentOrderId(null);
   };
 
+  const jwt = localStorage.getItem('jwt')
+
   const handleUpdateOrderStatus = (orderId, orderStatus) => {
+    console.log(orderId)
+    dispatch(actions.updateBookingStatus({ jwt, status: orderStatus, idBooking: orderId }))
     console.log(orderStatus);
     handleMenuClose();
   };
@@ -93,24 +96,24 @@ export const OrderTable = () => {
                   <TableCell align="center">
                     <Button
                       id="basic-button"
-                      aria-controls={anchorEl && currentOrderId === item.id ? 'basic-menu' : undefined}
+                      aria-controls={anchorEl && currentOrderId === item.bookingId ? 'basic-menu' : undefined}
                       aria-haspopup="true"
-                      aria-expanded={anchorEl && currentOrderId === item.id ? 'true' : undefined}
-                      onClick={(event) => handleClick(event, item.id)}
+                      aria-expanded={anchorEl && currentOrderId === item.bookingId ? 'true' : undefined}
+                      onClick={(event) => handleClick(event, item.bookingId)}
                     >
                       Cập nhật
                     </Button>
                     <Menu
                       id="basic-menu"
                       anchorEl={anchorEl}
-                      open={Boolean(anchorEl && currentOrderId === item.id)}
+                      open={Boolean(anchorEl && currentOrderId === item.bookingId)}
                       onClose={handleMenuClose}
                       MenuListProps={{
                         'aria-labelledby': 'basic-button',
                       }}
                     >
                       {orderStatus.map((status, index) => (
-                        <MenuItem key={index} onClick={() => handleUpdateOrderStatus(item.id, status.value)}>{status.label}</MenuItem>
+                        <MenuItem key={index} onClick={() => handleUpdateOrderStatus(item.bookingId, status.value)}>{status.label}</MenuItem>
                       ))}
                     </Menu>
                   </TableCell>

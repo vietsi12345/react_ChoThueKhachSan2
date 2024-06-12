@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux";
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import AddHomeIcon from '@mui/icons-material/AddHome';
+import * as actions from '../../../store/actions'
 
 const menu = [
     { title: "Quản lý khách hàng", icon: <Dashboard />, path: "/customers" },
@@ -28,6 +29,7 @@ const AdminSlideBar = ({ handleClose }) => {
     const handleNavigate = (item) => {
         navigate(`/admin${item.path}`)
         if (item.title === "Đăng xuất") {
+            dispatch(actions.logOut())
             navigate(`/`)
             handleClose()
         }

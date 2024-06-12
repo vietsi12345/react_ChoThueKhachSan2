@@ -4,6 +4,7 @@ const initstate = {
     dataPostNew: [],
     myBookings: [],
     allBooking: [],
+    statistic: [],
     msg: '',
 };
 
@@ -25,6 +26,20 @@ const bookingReducer = (state = initstate, action) => {
             return {
                 ...state,
                 allBooking: action.data || [],
+                msg: action.msg || '',
+            };
+        case actionType.GET_STATISTIC:
+            return {
+                ...state,
+                statistic: action.data || [],
+                msg: action.msg || '',
+            };
+        case actionType.UPDATE_BOOKINGSTATUS:
+            return {
+                ...state,
+                allBooking: state.allBooking.map((item) =>
+                    item.bookingId === action.data.bookingId ? action.data : item
+                ),
                 msg: action.msg || '',
             };
         case actionType.GET_CANCELBOOKING:
