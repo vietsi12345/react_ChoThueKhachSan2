@@ -6,6 +6,7 @@ const initstate = {
     homesSearch: [],
     msg: '',
     cities: [],
+    similarHotel: [],
     homesByCity: [],
     hotelByID: []
 }
@@ -33,6 +34,12 @@ const homeReducer = (state = initstate, action) => {
             return {
                 ...state,
                 homesByCity: action.homesByCity || [],
+                msg: action.msg || [],
+            }
+        case actionType.SIMILAR_HOTEL:
+            return {
+                ...state,
+                similarHotel: action.data || [],
                 msg: action.msg || [],
             }
         case actionType.GET_HOTELBYID:

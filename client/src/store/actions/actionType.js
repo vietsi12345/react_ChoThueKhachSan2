@@ -26,5 +26,6 @@ const actionType = {
     LOGOUT: 'LOGOUT',
     GET_USER_BYTOKEN: 'GET_USER_BYTOKEN',
     GET_ALL_USER: 'GET_ALL_USER',
+    SIMILAR_HOTEL: 'SIMILAR_HOTEL',
 }
 export default actionType

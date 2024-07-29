@@ -24,7 +24,7 @@ app.post('/haha', async (req, res) => {
     console.log(1)
 })
 
-app.post('/payment', async (req, res) => {
+app.post('/payment/zalopay', async (req, res) => {
     const { redirectUrl, amount } = req.body
 
     const embed_data = {
@@ -143,6 +143,79 @@ app.post('/check-status-order', async (req, res) => {
         console.log(error);
     }
 });
+
+
+app.post('/payment/momo', async (req, res) => {
+    const { redirectUrl, amount } = req.body;
+
+    // parameters
+    var accessKey = 'F8BBA842ECF85';
+    var secretKey = 'K951B6PE1waDMi640xX08PD3vg6EkVlz';
+    var orderInfo = 'pay with MoMo';
+    var partnerCode = 'MOMO';
+    var ipnUrl = 'https://webhook.site/b3088a6a-2d17-4f8d-a383-71389a6c600b';
+    var requestType = "payWithMethod";
+    var orderId = partnerCode + new Date().getTime();
+    var requestId = orderId;
+    var extraData = '';
+    var orderGroupId = '';
+    var autoCapture = true;
+    var lang = 'vi';
+
+    // before sign HMAC SHA256 with format
+    // accessKey=$accessKey&amount=$amount&extraData=$extraData&ipnUrl=$ipnUrl&orderId=$orderId&orderInfo=$orderInfo&partnerCode=$partnerCode&redirectUrl=$redirectUrl&requestId=$requestId&requestType=$requestType
+    var rawSignature = "accessKey=" + accessKey + "&amount=" + amount + "&extraData=" + extraData + "&ipnUrl=" + ipnUrl + "&orderId=" + orderId + "&orderInfo=" + orderInfo + "&partnerCode=" + partnerCode + "&redirectUrl=" + redirectUrl + "&requestId=" + requestId + "&requestType=" + requestType;
+
+    // signature
+    const crypto = require('crypto');
+    var signature = crypto.createHmac('sha256', secretKey)
+        .update(rawSignature)
+        .digest('hex');
+
+    // json object send to MoMo endpoint
+    const requestBody = JSON.stringify({
+        partnerCode: partnerCode,
+        partnerName: "Test",
+        storeId: "MomoTestStore",
+        requestId: requestId,
+        amount: amount,
+        orderId: orderId,
+        orderInfo: orderInfo,
+        redirectUrl: redirectUrl,
+        ipnUrl: ipnUrl,
+        lang: lang,
+        requestType: requestType,
+        autoCapture: autoCapture,
+        extraData: extraData,
+        orderGroupId: orderGroupId,
+        signature: signature
+    });
+
+    // option for axios 
+    const options = {
+        method: "POST",
+        url: "https://test-payment.momo.vn/v2/gateway/api/create",
+        data: requestBody,
+        headers: {
+            "Content-Type": "application/json",
+            "Content-Length": Buffer.byteLength(requestBody)
+        }
+    }
+
+    try {
+        const response = await axios(options);
+        return res.status(200).json(response.data);
+    } catch (error) {
+        console.error(error.response.data); // In ra lỗi chi tiết
+        return res.status(500).json({
+            statusCode: 500,
+            message: "server error"
+        });
+    }
+});
+
+
+
 
 app.listen(8888, () => {
     console.log('server run at port 8888')

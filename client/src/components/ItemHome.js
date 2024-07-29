@@ -1,15 +1,19 @@
 import React from 'react'
 import icons from '../ultils/icon'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { formatVietNameseToSring } from '../ultils/common/formatVietNameseToSring'
 import { formatMonneyVietNam } from '../ultils/common/formatMonneyVietNam'
 
 const { IoLocation, FaStar } = icons
 
 const ItemHome = ({ city, name, price, image, id, star }) => {
+    const navigate = useNavigate()
+    const handleNavigate = () => {
+        navigate(`/chi-tiet/${formatVietNameseToSring(name)}/${id}`)
+    }
     return (
-        <Link
-            to={`/chi-tiet/${formatVietNameseToSring(name)}/${id}`}
+        <div
+            onClick={handleNavigate}
             className='flex flex-col gap-1 cursor-pointer'
         >
             <img src={`data:image/png;base64,${image}`}
@@ -29,7 +33,7 @@ const ItemHome = ({ city, name, price, image, id, star }) => {
             </div>
             <span className='text-sm text-gray-600'>Giá mỗi đêm chưa gồm thuế và phí</span>
             <span className='text-red-600 font-medium'>{formatMonneyVietNam(price)} </span>
-        </Link>
+        </div>
     )
 }
 

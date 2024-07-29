@@ -118,3 +118,17 @@ export const apiUpdateHome = ({ idHotel, formData }) => new Promise(async (resol
     }
 })
 
+
+export const apiSilimarHotel = (idHotel) => new Promise(async (resolve, reject) => {
+    try {
+        const response = await axiosConfig({
+            method: 'get',
+            url: `/api/hotel/city/similar-hotels/${idHotel}`
+        })
+
+        resolve(response)
+    } catch (error) {
+        reject(error)
+    }
+})
+

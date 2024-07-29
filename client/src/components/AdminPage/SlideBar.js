@@ -5,14 +5,14 @@ var acc = document.getElementsByClassName("accordion");
 var i;
 
 for (i = 0; i < acc.length; i++) {
-    acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight) {
-        panel.style.maxHeight = null;
-    } else {
-        panel.style.maxHeight = panel.scrollHeight + "px";
-    } 
+    acc[i].addEventListener("click", function () {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+        } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+        }
     });
 }
 
@@ -21,7 +21,7 @@ function SlideBar() {
         <div className='Slide-Bar'>
             <div className="wrapper d-flex align-items-stretch "></div>
             <nav id="sidebar" className="" style={{ position: 'fixed', height: '100vh', overflowY: 'scroll' }}>
-            <img src = "https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg" alt="logo" />
+                <img src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg" alt="logo" />
                 <div className="p-4 pt-3">
                     <div className="home-btn-slide-bar-admin">
                         <a href="#">Trang Quản Lý</a>

@@ -16,11 +16,13 @@ const arrTestImg = [1, 2, 3, 4, 5, 6];
 
 const DetailHome = () => {
     const dispath = useDispatch()
-    const { hotelByID } = useSelector(state => state.home)
+    const { hotelByID, similarHotel } = useSelector(state => state.home)
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
         dispath(actions.getHotelByID(id))
+        dispath(actions.getSimilarHotel(id))
     }, []);
     const today = new Date();
     const tomorrow = new Date();
@@ -38,12 +40,14 @@ const DetailHome = () => {
 
     // xử lì chọnn ngày trên thanh search
 
+    console.log(similarHotel)
 
     const [startDate, setStartDate] = useState(startDate1);
     const [endDate, setEndDate] = useState(endDate1);
     const [rooms, setRooms] = useState(rooms1);
     const [adults, setAdults] = useState(adults1);
     const [children, setChildren] = useState(children1);
+
 
 
 
@@ -90,10 +94,18 @@ const DetailHome = () => {
                 children={children}
             />
             <div id='kslq' className='rounded-xl w-[1100px]  bg-blue-100 p-5 pt-7 flex flex-col gap-1'>
-                <h2 className='font-semibold text-lg'>Cơ sở lưu trú khác bạn có thể thích</h2>
+                <h2 className=' font-semibold text-lg'>Cơ sở lưu trú khác bạn có thể thích</h2>
                 <h2 className=' text-sm'>Cơ sở lưu trú tương tự đã được khách chọn</h2>
-                <div>
-                    {/* <ItemHome /> */}
+                <div className='m-5 max-w-[1020px] w-full flex flex-wrap justify-between pb-7'>
+                    {similarHotel.map((e, index) => (
+                        <ItemHome key={index} name={e.name}
+                            city={e.city}
+                            price={e.price}
+                            image={e?.photo}
+                            id={e.id}
+                            star={e?.rating}
+                        />
+                    ))}
                 </div>
             </div>
             <Utilities name={hotelByID?.name} />

@@ -1,5 +1,5 @@
 import actionType from "./actionType";
-import { apiCreateHotel, apiDeleteHotel, apiGetAlltHomes, apiGetHomesByCityName, apiGetHotelByID, apiGetListCities, apiSearchHomesByName, apiUpdateHome } from '../../services/Home'
+import { apiCreateHotel, apiDeleteHotel, apiGetAlltHomes, apiGetHomesByCityName, apiGetHotelByID, apiGetListCities, apiSearchHomesByName, apiSilimarHotel, apiUpdateHome } from '../../services/Home'
 
 export const getAllHome = () => async (dispath) => {
     try {
@@ -194,6 +194,31 @@ export const updateHotel = ({ idHotel, formData }) => async (dispath) => {
     } catch (error) {
         dispath({
             type: actionType.UPDATE_HOME,
+            data: null
+        })
+    }
+}
+
+export const getSimilarHotel = (idHotel) => async (dispath) => {
+    try {
+        const response = await apiSilimarHotel(idHotel)
+
+        if (response.status === 200) {
+            dispath({
+                type: actionType.SIMILAR_HOTEL,
+                data: response.data
+            })
+        } else {
+
+            dispath({
+                type: actionType.SIMILAR_HOTEL,
+                msg: 'Lỗi'
+            })
+        }
+
+    } catch (error) {
+        dispath({
+            type: actionType.SIMILAR_HOTEL,
             data: null
         })
     }

@@ -13,8 +13,8 @@ const { TbCircleNumber1, TbCircleNumber2, TbCircleNumber3, GoDotFill, FaCheck, R
 
 const BookingV2 = () => {
     const [time, setTime] = useState(10 * 60 + 0) // set thời gian đếm ngược là 10 phút
-    const [selectedOption, setSelectedOption] = useState('vietQR');
-    const [isShowOptioneVietQR, setIsShowOptioneVietQR] = useState(true)
+    const [selectedOption, setSelectedOption] = useState('Momo');
+    const [isShowOptioneMomo, setIsShowOptioneMomo] = useState(true)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const location = useLocation();
@@ -24,10 +24,10 @@ const BookingV2 = () => {
     const handleChange = (e) => {
         const value = e.target.value;
         setSelectedOption(value);
-        if (value === 'vietQR') {
-            setIsShowOptioneVietQR(true);
+        if (value === 'Momo') {
+            setIsShowOptioneMomo(true);
         } else {
-            setIsShowOptioneVietQR(false);
+            setIsShowOptioneMomo(false);
         }
     };
 
@@ -67,7 +67,7 @@ const BookingV2 = () => {
     }
 
     const handlePayment = async (redirectUrl, amount) => {
-        if (!isShowOptioneVietQR) {
+        if (!isShowOptioneMomo) {
             try {
                 const paymentData = await apiZaloPay({ redirectUrl, amount });
                 // Xử lý dữ liệu phản hồi, ví dụ: chuyển hướng người dùng tới URL thanh toán
@@ -122,23 +122,23 @@ const BookingV2 = () => {
                             <div className='flex gap-3 items-center px-4'>
                                 <input
                                     type='radio'
-                                    id='vietQR'
+                                    id='Momo'
                                     name='payment'
-                                    value='vietQR'
-                                    checked={selectedOption === 'vietQR'}
+                                    value='Momo'
+                                    checked={selectedOption === 'Momo'}
                                     onChange={handleChange}
                                     className='size-6'
                                 />
-                                <label htmlFor='vietQR' className='text-xl font-semibold'>VietQR</label>
+                                <label htmlFor='Momo' className='text-xl font-semibold'>Momo</label>
                                 <span className='bg-[#DDFEB4] text-sm'>Ưu đãi giảm giá</span>
-                                <img src='https://ik.imagekit.io/tvlk/image/imageResource/2024/03/12/1710225192565-14c2ea75fea49e7275568da5178454f5.png?tr=h-24,q-75'
+                                <img src='https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png'
                                     className='w-[50px] h-[24px] object-contain mr-2 ml-auto'
                                 />
                             </div>
-                            {isShowOptioneVietQR && <div className='mx-8 flex flex-col gap-2 bg-blue-100 p-3 rounded-xl border border-blue-700'>
+                            {isShowOptioneMomo && <div className='mx-8 flex flex-col gap-2 bg-blue-100 p-3 rounded-xl border border-blue-700'>
                                 <div className='flex  gap-2'>
                                     <GoDotFill size={15} />
-                                    <span className='text-sm'>Đảm bảo bạn có ví điện tử hoặc ứng dụng ngân hàng di động hỗ trợ thanh toán bằng VietQR.</span>
+                                    <span className='text-sm'>Đảm bảo bạn có ví điện tử hoặc ứng dụng ngân hàng di động hỗ trợ thanh toán bằng Momo.</span>
                                 </div>
                                 <div className='flex  gap-2'>
                                     <GoDotFill size={15} />
@@ -165,7 +165,7 @@ const BookingV2 = () => {
                                     className='w-[50px] h-[24px] object-contain mr-2 ml-auto'
                                 />
                             </div>
-                            {!isShowOptioneVietQR && <div className='mx-8 flex flex-col gap-2 bg-blue-100 p-3 rounded-xl border border-blue-700'>
+                            {!isShowOptioneMomo && <div className='mx-8 flex flex-col gap-2 bg-blue-100 p-3 rounded-xl border border-blue-700'>
                                 <div className='flex  gap-2'>
                                     <GoDotFill size={15} />
                                     <span className='text-sm'>Đảm bảo bạn có ví điện tử hoặc ứng dụng ngân hàng di động hỗ trợ thanh toán bằng ZaloPay.</span>
@@ -189,7 +189,7 @@ const BookingV2 = () => {
                                         className='bg-orange-500 text-white font-semibold text-lg p-3 rounded-lg hover:bg-orange-700'
                                         onClick={() => handlePayment(`http://localhost:3000/booking/v3/${formatVietNameseToSring(nameHotel)}/${idHotel}/${formatVietNameseToSring(nameHotel)}/${idRoom}/${getConfirmationCode()}`, total)}
                                     >
-                                        {isShowOptioneVietQR ? `Thanh toán bằng VietQR` : `Thanh toán bằng ZaloPay`}
+                                        {isShowOptioneMomo ? `Thanh toán bằng Momo` : `Thanh toán bằng ZaloPay`}
                                     </button>
                                     <span className='text-sm text-center'>Bằng việc tiếp tục thanh toán, bạn đã đồng ý với Điều khoản & Điều kiện cũng như Chính sách quyền riêng tư của Traveloka.</span>
                                 </div>

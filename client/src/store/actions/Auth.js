@@ -46,7 +46,7 @@ export const signIn = ({ data, navigate }) => async (dispath) => {
                 navigate('/')
             }
             else {
-                navigate('/admin')
+                navigate('/admin/customers')
             }
         }
         else {

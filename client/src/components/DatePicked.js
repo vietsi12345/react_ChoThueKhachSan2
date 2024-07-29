@@ -13,7 +13,7 @@ const DatePicked = ({ startDate, endDate, setStartDate, setEndDate }) => {
 
     return (
         <div className="date-inputs flex bg-white rounded-lg ">
-            <div className='border border-gray-300 h-[53.6px] rounded-lg flex gap-2 items-center p-3 hover:cursor-pointer'>
+            <div className='border w-1/2 border-gray-300 h-[53.6px] rounded-lg flex gap-2 items-center p-3 hover:cursor-pointer'>
                 <LuCalendarSearch size={24} />
                 <div>
                     <DatePicker
@@ -30,7 +30,7 @@ const DatePicked = ({ startDate, endDate, setStartDate, setEndDate }) => {
                     />
                 </div>
             </div>
-            <div className='border border-gray-300 h-[53.6px] rounded-lg flex gap-2 items-center p-3 hover:cursor-pointer'>
+            <div className='border w-1/2 border-gray-300 h-[53.6px] rounded-lg flex gap-2 items-center p-3 hover:cursor-pointer'>
                 <LuCalendarSearch size={24} />
                 <div>
                     <DatePicker
